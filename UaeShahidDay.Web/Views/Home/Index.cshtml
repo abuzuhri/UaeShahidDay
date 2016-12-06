@@ -1,0 +1,97 @@
+﻿@model IList <UaeShahidDay.Data.Entity.Shahid>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+    <div class="col-lg-12" style="text-align: center">
+        <h3>قائمة الشرف </h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+        <input type="search" id="search" value="" class="form-control" placeholder="لطفا , أدخل الاسم " style="text-align: right">
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 ">
+        <table class="table" id="table" style="text-align: right">
+            <thead style="text-align: right">
+                <tr>
+                    <th style="text-align: right">صورة اللوح</th>
+                    <th style="text-align: right">الاسم</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+@foreach (var itm in Model)
+{
+                <tr>
+                    <td>
+                        <img id="myImg@(itm.ID)" src="image/Ahmed Al Hammadi Photo.jpg" width="20" height="20" alt="@itm.Name"  onclick="openImg('@(itm.ID)')">
+
+                        <!-- The Modal -->
+                        <div id="myModal@(itm.ID)" class="modal">
+                            <span class="close" id="close@(itm.ID)">×</span>
+                            <img class="modal-content" id="img@(itm.ID)">
+                            <div id="caption@(itm.ID)">@itm.Name</div>
+                        </div>
+                    </td>
+                    <td>@itm.Name</td>
+
+                </tr>
+}
+
+            </tbody>
+        </table>
+        <hr>
+    </div>
+</div>
+@section Scripts {
+<script>
+    $(function () {
+        $('#table').searchable({
+            striped: true,
+            oddRow: { 'background-color': '#f5f5f5' },
+            evenRow: { 'background-color': '#fff' },
+            searchType: 'fuzzy'
+        });
+
+        $('#searchable-container').searchable({
+            searchField: '#container-search',
+            selector: '.row',
+            childSelector: '.col-xs-4',
+            show: function (elem) {
+                elem.slideDown(100);
+            },
+            hide: function (elem) {
+                elem.slideUp(100);
+            }
+        })
+    });    function openImg(id) {
+        // Get the modal
+        var modal = document.getElementById('myModal' + id);
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById('myImg' + id);
+        var modalImg = document.getElementById("img" + id);
+        var captionText = document.getElementById("caption" + id);
+       // img.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = img.src;
+            captionText.innerHTML = img.alt;
+        //}
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementById("close" + id);
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+    }
+</script>
+}

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3C5786CD-91E3-4E48-9983-34AD0FDE6FCD}</ProjectGuid>
+    <ProjectGuid>{1BA43E8F-DD2F-4887-B772-560BD1635EB7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UaeShahidDay.Data</RootNamespace>
-    <AssemblyName>UaeShahidDay.Data</AssemblyName>
+    <RootNamespace>UaeShahidDay.Service</RootNamespace>
+    <AssemblyName>UaeShahidDay.Service</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -53,16 +53,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\MainContext.cs" />
-    <Compile Include="Entity\Shahid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitOfWork\AppBaseUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\SetupUnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UaeShahidDay.Data\UaeShahidDay.Data.csproj">
+      <Project>{3c5786cd-91e3-4e48-9983-34ad0fde6fcd}</Project>
+      <Name>UaeShahidDay.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
