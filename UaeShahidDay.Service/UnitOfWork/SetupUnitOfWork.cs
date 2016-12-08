@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,21 @@ namespace UaeShahidDay.Service.UnitOfWork
             var list = qry.ToList();
 
             return list;
+        }
+
+        public void DeleteShahid(long Id)
+        {
+            ShahidRepository.Delete(Id);
+            Save();
+        }
+
+        public void AddShahid(string name, string fileName)
+        {
+            Shahid shahid = new Shahid();
+            shahid.Name = name;
+            shahid.ImageUrl = fileName;
+            ShahidRepository.Insert(shahid);
+            Save();
         }
     }
 }

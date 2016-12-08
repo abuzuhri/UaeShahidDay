@@ -1,4 +1,4 @@
-﻿@model IList <UaeShahidDay.Data.Entity.Shahid>
+﻿@model IList<UaeShahidDay.Data.Entity.Shahid>
 
 @{
     ViewBag.Title = "Home Page";
@@ -6,10 +6,16 @@
 
 
 <div class="row">
-    <div class="col-lg-12" style="text-align: center">
+    <div class="col-lg-6" style="text-align: center">
         <h3>قائمة الشرف </h3>
     </div>
+    <div class="col-lg-6" style="text-align: center">
+        <a href="@Url.Action("Add")" type="button" value="Add">Add new</a>
+    </div>
 </div>
+
+
+
 <div class="row">
     <div class="col-lg-4 col-lg-offset-4">
         <input type="search" id="search" value="" class="form-control" placeholder="لطفا , أدخل الاسم " style="text-align: right">
@@ -20,6 +26,7 @@
         <table class="table" id="table" style="text-align: right">
             <thead style="text-align: right">
                 <tr>
+                    <th style="text-align: right"> حذف</th>
                     <th style="text-align: right">صورة اللوح</th>
                     <th style="text-align: right">الاسم</th>
 
@@ -27,23 +34,25 @@
             </thead>
             <tbody>
 
-@foreach (var itm in Model)
-{
-                <tr>
-                    <td>
-                        <img id="myImg@(itm.ID)" src="@Url.Content("~/images/")@(itm.ImageUrl)" width="20" height="20" alt="@itm.Name"  onclick="openImg('@(itm.ID)')">
+                @foreach (var itm in Model)
+                {
+                    <tr>
+                        <td><a href="@Url.Action("Delete",new { id=itm.ID})">حذف</a></td>
+                        <td>
 
-                        <!-- The Modal -->
-                        <div id="myModal@(itm.ID)" class="modal">
-                            <span class="close" id="close@(itm.ID)">×</span>
-                            <img class="modal-content" id="img@(itm.ID)">
-                            <div id="caption@(itm.ID)">@itm.Name</div>
-                        </div>
-                    </td>
-                    <td>@itm.Name</td>
+                            <img id="myImg@(itm.ID)" src="@Url.Content("~/images/")@(itm.ImageUrl)" width="20" height="20" alt="@itm.Name" onclick="openImg('@(itm.ID)')">
 
-                </tr>
-}
+                            <!-- The Modal -->
+                            <div id="myModal@(itm.ID)" class="modal">
+                                <span class="close" id="close@(itm.ID)">×</span>
+                                <img class="modal-content" id="img@(itm.ID)">
+                                <div id="caption@(itm.ID)">@itm.Name</div>
+                            </div>
+                        </td>
+                        <td>@itm.Name</td>
+
+                    </tr>
+                }
 
             </tbody>
         </table>
@@ -51,7 +60,7 @@
     </div>
 </div>
 @section Scripts {
-<script>
+    <script>
     $(function () {
         $('#table').searchable({
             striped: true,
@@ -95,5 +104,5 @@
         }
 
     }
-</script>
+    </script>
 }
